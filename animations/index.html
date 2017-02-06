@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="es" ng-app="myApp">
+<head>
+    <meta charset="UTF-8">
+    <title>Angular Animations with ngAnimate</title>
+
+    <style>
+        .cssanimationTimes{
+            transition: width 2s, background-color 10s, color 10s;
+            transition-timing-function: cubic-bezier(0, 0.49, 0.51, 0.34);
+            width: 100px;
+        }
+
+        .large {
+            width: 300px;
+        }
+
+        .red {
+            background-color: red;
+            color: white;
+        }
+
+        /* mi primera animacion con angular*/
+        .firstSampleAnimation.ng-hide-add,
+        .firstSampleAnimation.ng-hide-remove {
+            -webkit-transition: 1s ease-in-out opacity;
+            transition: 1s ease-in-out opacity;
+            opacity: 1;
+        }
+
+        .firstSampleAnimation.ng-hide {
+            opacity: 0;
+        }
+
+        /* ngIf animation */
+        .animationIf.ng-enter,
+        .animationIf.ng-leave{
+            -webkit-transition: opacity ease-in-out 1s;
+            transition: opacity ease-in-out 1s;
+        }
+
+        .animationIf.ng-enter,
+        .animationIf.ng-leave.ng-leave-active{
+            opacity: 0;
+        }
+
+        .animationIf.ng-leave,
+        .animationIf.ng-enter.ng-enter-active{
+            opacity: 1;
+        }
+
+
+        /* animation ng-repeat */
+        .repeatAnimation.ng-enter{
+            animation: 1s ng-enter-repeat-animation;
+        }
+        
+        @keyframes ng-enter-repeat-animation {
+            from{
+                opacity: 0;
+                color: red;
+            }
+            to{
+                opacity: 1;
+                color: black;
+            }
+        }
+
+        .repeatAnimation.ng-leave{
+            animation: 1s ng-leave-repeat-animation;
+        }
+        @keyframes ng-leave-repeat-animation {
+            from{
+                opacity: 1;
+                color: black;
+            }
+            to{
+                opacity: 0;
+                color: white;
+            }
+        }
+
+        .repeatAnimation.ng-move{
+            animation: 1s ng-move-repeat-animation;
+        }
+        @keyframes ng-move-repeat-animation {
+            from {
+                opacity: 1;
+                color: black;
+            }
+            to {
+                opacity: 0.5;
+                color: blue;
+            }
+        }
+
+
+        /* Animation with ngClass*/
+
+        .initialNgClass{
+           width: 0px;
+            background: red;
+        }
+
+        .animationNgClass{
+            width: 100%;
+        }
+
+        .initialNgClass.animationNgClass-add{
+            animation: 1s ng-class-animation;
+        }
+
+        .initialNgClass.animationNgClass-remove{
+            animation: 1s ng-class-animation reverse;
+        }
+
+
+        @keyframes ng-class-animation {
+            from {
+                width: 0;
+            }
+            to {
+                width: 100%;
+            }
+        }
+
+
+
+        /*      Animation with Ng hide   */
+
+        .animationNgHide.ng-hide-add{
+            transition: all 400ms;
+            transform: translate(0);
+            opacity: 1;
+        }
+
+        .animationNgHide.ng-hide-add-active{
+            opacity: 0;
+            transform: translate(0,5px);
+        }
+
+        .animationNgHide.ng-hide-remove{
+            transition: all 400ms;
+            transform: translate(3px);
+            opacity: 0;
+        }
+        .animationNgHide.ng-hide-remove-active{
+            opacity: 1;
+            transform: translate(0);
+        }
+
+
+
+        /* Animacion into Form with NgModel states */
+        .inputSample.ng-invalid{
+            color: red;
+        }
+        .inputSample.ng-invalid-add{
+            transition: 1s all;
+            color: black;
+        }
+
+        .inputSample.ng-invalid-add-active{
+            color: red;
+        }
+
+        .ngMessagesClass{
+            height: 50px;
+            width:350px;
+        }
+
+        .ngMessagesClass.ng-active-add{
+            transition: 0.3s linear all;
+            background-color: red;
+        }
+
+        .ngMessagesClass.ng-active{
+            background-color: red;
+        }
+
+
+        .ngMessagesClass.ng-inactive-add {
+            transition: 0.3s linear all;
+            background-color: white;
+        }
+
+        .ngMessagesClass.ng-inactive {
+            background-color: white;
+        }
+
+        .ngMessageClass {
+            color: white;
+        }
+
+        .ngMessageClass.ng-enter {
+            transition: 0.3s linear all;
+            color: transparent;
+        }
+        .ngMessageClass.ng-enter-active {
+            color: white;
+        }
+        .ngMessageClass.ng-leave {
+            transition: 0.3s linear all;
+            color: white;
+        }
+        .ngMessageClass.ng-leave-active {
+            color: transparent;
+        }
+
+    </style>
+
+</head>
+<body>
+    <h1>CSS Transition animation</h1>
+    <div ng-controller="myController">
+        <p>Value de fadeAnimation: {{fadeAnimation}}</p>
+        <div class="cssanimationTimes firstSampleAnimation " ng-show="fadeAnimation">
+            Element with cssanimationTimes class
+        </div>
+
+        <button id="trigger">Trigger animation</button>
+        <button id="triggerReset">Reset animation</button>
+
+        <hr>
+
+        <br>
+        <div class="animationIf" ng-if="fadeAnimation">
+            Elemento con if animation class
+        </div>
+
+
+        <button ng-click="fadeAnimation = !fadeAnimation">Fade Animation</button>
+
+
+        <hr>
+
+        <h3>Animation NgRepeat</h3>
+        <div ng-repeat="item in items" class="repeatAnimation">
+            {{item.name}}
+        </div>
+
+        <button ng-click="addItem()">Add item</button>
+        <button ng-click="removeItem()">Remove  item</button>
+        <button ng-click="sortItems()"> Sort items</button>
+
+        <hr>
+
+        <h3>Animation with ngClass</h3>
+        <div ng-class="{
+            'animationNgClass':animateNgClass
+        }" class="initialNgClass">
+            This element is animated with ngClass.
+        </div>
+
+        <button ng-click="animateNgClass = !animateNgClass">Toggle ngClass</button>
+
+
+        <hr>
+
+        <h3>Animation with ngHide</h3>
+        <div class="animationNgHide" ng-hide="animatationNgHide">
+            This element is animated with ngHide
+        </div>
+
+        <button ng-click="animatationNgHide = !animatationNgHide">Toggle Ng Hide</button>
+
+
+        <hr>
+
+        <h3>Animacion in Forms with ngModel states</h3>
+        <form name="form">
+            <input type="text"
+                   name="inputSample"
+                   class="inputSample"
+                   ng-model="ngModelNumber"
+                   ng-pattern="/^\d+$/"
+                   ng-minlength="5" ng-maxlength="10"
+            >
+
+            <div ng-messages="form.inputSample.$error" class="ngMessagesClass" ng-messages-multiple>
+                <div ng-message="pattern" class="ngMessageClass">
+                    Los datos son incorrectos, solo numeros por favor
+                </div>
+                <div ng-message="minlength" class="ngMessageClass">
+                    El numero es muy pequeño
+                </div>
+
+                <div ng-message="maxlength" class="ngMessageClass">
+                    El numero es demasiado grande
+                </div>
+            </div>
+
+            <pre>
+                {{form|json}}
+            </pre>
+        </form>
+
+
+    </div>
+
+
+
+    <script src="../bower_components/angular/angular.min.js"></script>
+    <script src="../bower_components/angular-animate/angular-animate.min.js"></script>
+    <script src="../bower_components/angular-messages/angular-messages.min.js"></script>
+    <script src="../bower_components/angular-route/angular-route.min.js"></script>
+
+    <!-- Iniciando modulo angular -->
+    <script>
+        var myApp = angular.module('myApp',['ngAnimate','ngMessages','ngRoute']);
+
+        myApp.config(['$routeProvider',function ($routeProvider) {
+            $routeProvider
+                .when('/First', {
+                    templateUrl: 'first.html'
+                })
+                .when('/Second', {
+                    templateUrl: 'second.html'
+                })
+                .otherwise({
+                    redirectTo: '/First'
+                });
+        }]);
+
+        myApp.controller('myController',function ($scope) {
+           $scope.fadeAnimation= false;
+           $scope.animateNgClass = false;
+           $scope.animatationNgHide = false;
+           $scope.ngModelNumber = '';
+
+            $scope.items = [
+                { name: 'Richard' },
+                { name: 'Bruno' } ,
+                { name: 'Jobson' }
+                ];
+
+            $scope.counter = 0;
+            $scope.addItem = function () {
+                var name = 'Item' + $scope.counter++;
+                $scope.items.push({ name: name });
+            };
+
+            $scope.removeItem = function () {
+                var length = $scope.items.length;
+                var indexRemoved = Math.floor(Math.random() * length);
+                $scope.items.splice(indexRemoved, 1);
+            };
+
+            $scope.sortItems = function () {
+                $scope.items.sort(function (a, b) {
+                    return a[name] < b[name] ? -1 : 1
+                });
+            };
+
+        });
+    </script>
+
+    <script>
+        document.getElementById('trigger').addEventListener ('click', function () {
+            console.log("escuchando click event");
+            var element = document.getElementsByClassName ('cssanimationTimes')[0];
+            element.className = element.className + " red large";
+        });
+
+        document.getElementById('triggerReset').addEventListener('click',function () {
+           var element =  document.getElementsByClassName('cssanimationTimes')[0];
+           console.log("elemento con css: ", element.className);
+           element.className = 'cssanimationTimes'
+        });
+
+    </script>
+
+</body>
+</html>
