@@ -207,6 +207,81 @@
             color: transparent;
         }
 
+
+        /* Animation ngView */
+        .ngViewRelative {
+            position: relative;
+            height: 300px;
+        }
+
+        .ngViewContainer {
+            position: absolute;
+            width: 500px;
+            display: block;
+        }
+
+        .ngViewContainer.ng-enter,
+        .ngViewContainer.ng-leave {
+            -webkit-transition: 600ms linear all;
+            transition: 600ms linear all;
+            opacity: 0;
+        }
+
+        .ngViewContainer.ng-enter {
+            transform: translateX(10px);
+            opacity: 0;
+        }
+
+        .ngViewContainer.ng-enter-active {
+            transform: translateX(0px);
+            opacity: 1;
+        }
+
+        .ngViewContainer.ng-leave {
+            transform: translateX(0px);
+            opacity: 1;
+        }
+
+        .ngViewContainer.ng-leave-active {
+            transform: translateX(-10px);
+            opacity: 0;
+        }
+
+        /* animation in ngSwitch */
+        .ngSwitchAnimation{
+            position: relative;
+            height: 25px;
+            overflow: hidden;
+        }
+
+        .switchItem {
+            position: absolute;
+            width: 500px;
+            display: block;
+        }
+
+        .switchItem.ng-enter,
+        .switchItem.ng-leave{
+            -webkit-transition: 300ms linear all;
+            -moz-transition: 300ms linear all;
+            -ms-transition: 300ms linear all;
+            -o-transition: 300ms linear all;
+            transition: 300ms linear all;
+        }
+
+        /* When the element is about to enter DOM*/
+        .switchItem.ng-enter-active{
+            bottom: 0;
+        }
+
+        .switchItem.ng-leave {
+            bottom: 0;
+        }
+
+        .switchItem.ng-leave-active {
+            bottom: -100%;
+        }
+
     </style>
 
 </head>
@@ -295,6 +370,30 @@
             </pre>
         </form>
 
+        <hr>
+
+        <h3>Sample ngView animation</h3>
+
+        <div class="ngViewRelative">
+            <a href="#!/First">First page</a>
+            <a href="#!/Second">Second page</a>
+            <div ng-view class="ngViewContainer"></div>
+        </div>
+
+        <hr>
+
+        <h3>Sample ngSwitch animation</h3>
+        <strong>Selecciona una opcion: </strong>
+        <select ng-model="ngSwitchSelected" ng-options="item for item in ngSwitchItems"></select>
+        <br>
+        <strong>Item seleccionado: </strong>{{ngSwitchSelected}}
+
+        <div class="ngSwitchAnimation" ng-switch="ngSwitchSelected">
+            <div class="switchItem" ng-switch-when="item1">Item  1</div>
+            <div class="switchItem" ng-switch-when="item2">Item  2</div>
+            <div class="switchItem" ng-switch-when="item3">Item  3</div>
+            <div class="switchItem" ng-switch-default>Default  Item</div>
+        </div>
 
     </div>
 
@@ -312,10 +411,10 @@
         myApp.config(['$routeProvider',function ($routeProvider) {
             $routeProvider
                 .when('/First', {
-                    templateUrl: 'first.html'
+                    templateUrl: 'templates/first.html'
                 })
                 .when('/Second', {
-                    templateUrl: 'second.html'
+                    templateUrl: 'templates/second.html'
                 })
                 .otherwise({
                     redirectTo: '/First'
@@ -327,6 +426,7 @@
            $scope.animateNgClass = false;
            $scope.animatationNgHide = false;
            $scope.ngModelNumber = '';
+           $scope.ngSwitchItems = ['item1', 'item2', 'item3'];
 
             $scope.items = [
                 { name: 'Richard' },
