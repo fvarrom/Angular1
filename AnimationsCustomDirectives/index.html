@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="es" ng-app="myApp">
+<head>
+    <meta charset="UTF-8">
+    <title>Animation with custom directives</title>
+
+    <!--  my css -->
+    <link rel="stylesheet" href="css/addRemoveClass.css">
+    <link rel="stylesheet" href="css/toggleDirective.css">
+    <link rel="stylesheet" href="css/moveDirective.css">
+</head>
+<body>
+
+    <div ng-controller="myController">
+        <section>
+            <h3>addClass and removeClass with trigger event click</h3>
+            <div class="customAnimation" my-directive-add-remove >
+                Elemento con add y remove class en un custom directive (click sobre el panel)
+            </div>
+        </section>
+
+        <section>
+            <h3>Toggle using enter and leave </h3>
+            <div toggle-directive="" class="enterAnimation"></div>
+        </section>
+
+
+        <section>
+            <h3>$animate move sample</h3>
+            <p>Click on any element below to move elements:</p>
+
+            <div move-directive="" class="moveAnimation">
+                <div class="element1 moveItem">Element 1</div>
+                <div class="element2 moveItem">Element 2</div>
+                <div class="element3 moveItem">Element 3</div>
+            </div>
+
+        </section>
+
+    </div>
+
+
+    <!-- my libreries -->
+    <script src="../bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="../bower_components/angular/angular.min.js"></script>
+    <script src="../bower_components/angular-animate/angular-animate.min.js"></script>
+
+
+    <!-- my scripts -->
+    <script>
+        var myApp = angular.module('myApp',['ngAnimate']);
+    </script>
+
+    <script src="myController.js"></script>
+    <script src="js/addRemoveClass.js"></script>
+    <script src="js/toggleDirective.js"></script>
+    <script src="js/moveDirective.js"></script>
+
+</body>
+</html>

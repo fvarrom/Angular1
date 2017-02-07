@@ -1,0 +1,30 @@
+
+.customAnimation{
+    background-color: blue;
+    padding: 20px;
+    color: white;
+    transition: all linear 1s;
+}
+
+.customClick{
+    background-color: yellow;
+    color:black;
+    padding: 40px;
+}
+
+.customAnimation.customClick-add-active{
+    animation: 1s ng-class-animation;
+}
+
+.customAnimation.customClick-remove-active{
+    animation: 1s ng-class-animation reverse;
+}
+
+@keyframes ng-class-animation {
+    from{
+        border: 1px solid black;
+    }
+    to{
+        border: 1px double white ;
+    }
+}

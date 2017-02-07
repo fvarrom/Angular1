@@ -1,0 +1,16 @@
+
+@keyframes ng-move-repeat-animation {
+    from {
+        opacity: 1;
+        color: black;
+    }
+    to {
+        opacity: 0.5;
+        color: blue;
+    }
+}
+
+.moveItem.ng-move {
+    -webkit-animation: 1s ng-move-repeat-animation;
+    animation: 1s ng-move-repeat-animation;
+}

@@ -1,0 +1,15 @@
+.toggleAnimation.ng-enter,
+.toggleAnimation.ng-leave {
+    -webkit-transition: opacity ease-in-out 1s;
+    transition: opacity ease-in-out 1s;
+}
+
+.toggleAnimation.ng-enter,
+.toggleAnimation.ng-leave.ng-leave-active {
+    opacity: 0;
+}
+
+.toggleAnimation.ng-leave,
+.toggleAnimation.ng-enter.ng-enter-active {
+    opacity: 1;
+}
