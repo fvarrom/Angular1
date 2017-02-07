@@ -1,5 +1,5 @@
 
-myApp.animation('.AnimationNgIfJS',function () {
+myApp.animation('.animationNgIfJS',function () {
    function animationOpacity(element, done, opacity) {
        jQuery(element).animate({
            opacity: opacity
@@ -8,6 +8,7 @@ myApp.animation('.AnimationNgIfJS',function () {
 
 
    var enterAnimation  = function (element, done) {
+
        if(!Modernizr.csstransitions){
            jQuery(element).css({ opacity: 0 });
            animationOpacity(element,done,1);

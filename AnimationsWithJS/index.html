@@ -5,18 +5,24 @@
     <title>Animation with JS and Angular</title>
 
     <style>
-        .AnimationNgIfJS.ng-enter,
-        .AnimationNgIfJS.ng-leave{
+
+        .animationNgIfJS{
+            background: red;
+        }
+
+        .animationNgIfJS.ng-enter,
+        .animationNgIfJS.ng-leave{
+            -webkit-transition: opacity ease-in-out 1s;
             transition: opacity ease-in-out 1s;
         }
 
-        .AnimationNgIfJS.ng-enter,
-        .AnimationNgIfJS.ng-leave.ng-leave-active{
+        .animationNgIfJS.ng-enter,
+        .animationNgIfJS.ng-leave.ng-leave-active{
             opacity: 0;
         }
 
-        .AnimationNgIfJS.ng-leave,
-        .AnimationNgIfJS.ng-enter.ng-enter-active{
+        .animationNgIfJS.ng-leave,
+        .animationNgIfJS.ng-enter.ng-enter-active{
             opacity: 1;
         }
 
@@ -57,7 +63,7 @@
     <section ng-controller="MyController">
         <h3>Animation ngIf with JS</h3>
 
-        <div ng-if="animationNgIf" class="AnimationNgIfJS">
+        <div ng-if="animationNgIf" class="animationNgIfJS">
             Elemento div con animation ng-if
             <strong>CON DETECCION DE CSS3 (MODERNIZR.JS)</strong>
         </div>
