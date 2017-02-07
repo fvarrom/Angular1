@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="es" ng-app="myApp">
+<head>
+    <meta charset="UTF-8">
+    <title>Animation with JS and Angular</title>
+
+    <style>
+        .AnimationNgIfJS.ng-enter,
+        .AnimationNgIfJS.ng-leave{
+            transition: opacity ease-in-out 1s;
+        }
+
+        .AnimationNgIfJS.ng-enter,
+        .AnimationNgIfJS.ng-leave.ng-leave-active{
+            opacity: 0;
+        }
+
+        .AnimationNgIfJS.ng-leave,
+        .AnimationNgIfJS.ng-enter.ng-enter-active{
+            opacity: 1;
+        }
+
+    </style>
+
+</head>
+<body>
+
+    <section ng-controller="MyController">
+        <h3>Animation ngClass with JS</h3>
+
+        <div ng-class="{
+            'animationClass': animationClass
+        }">
+            Elemento div con animation class con js
+        </div>
+
+        <button ng-click="animationClass = !animationClass">
+            Toggle Animation Class
+        </button>
+
+    </section>
+
+
+    <section ng-controller="MyController">
+        <h3>Animation ngHide with JS</h3>
+
+        <div ng-hide="animationNgHide" class="AnimationNgHideJS">
+            Elemento div con animation ng-hide
+        </div>
+
+        <button ng-click="animationNgHide = !animationNgHide">
+            Toggle Animation NgHide
+        </button>
+
+    </section>
+
+    <section ng-controller="MyController">
+        <h3>Animation ngIf with JS</h3>
+
+        <div ng-if="animationNgIf" class="AnimationNgIfJS">
+            Elemento div con animation ng-if
+            <strong>CON DETECCION DE CSS3 (MODERNIZR.JS)</strong>
+        </div>
+
+        <button ng-click="animationNgIf = !animationNgIf">
+            Toggle Animation NgIf
+        </button>
+
+    </section>
+
+    <section ng-controller="MyController">
+        <h3>Animation ngRepeat with JS</h3>
+
+        <div ng-repeat="item in items" class="animationNgRepeat">
+            {{item.name}}
+        </div>
+
+        <button ng-click="ordenarItems()">
+            Ordenar Lista
+        </button>
+
+    </section>
+
+
+    <!-- Libraries -->
+    <script src="../bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="../bower_components/angular/angular.min.js"></script>
+    <script src="../bower_components/angular-animate/angular-animate.min.js"></script>
+    <script src="libs/modernizr.min.js"></script>
+
+    <!--- my scripts -->
+    <script src="js/animationNgClass.js"></script>
+    <script src="js/animationNgHide.js"></script>
+    <script src="js/animationNgIf.js"></script>
+    <script src="js/animationNgRepeat.js"></script>
+
+</body>
+</html>
